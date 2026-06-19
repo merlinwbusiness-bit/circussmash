@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circus Smash — Smash Burgers</title>
+<meta name="description" content="Circus Smash: smash burgers, pollo, veggie y postres en Vilanova i la Geltrú y Sant Pere de Ribes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Monoton&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>SMASH BURGERS</span><span>★</span>
+      <span>VILANOVA I LA GELTRÚ</span><span>★</span>
+      <span>SANT PERE DE RIBES</span><span>★</span>
+      <span>PAN SIN GLUTEN DISPONIBLE</span><span>★</span>
+      <span>SMASH BURGERS</span><span>★</span>
+      <span>VILANOVA I LA GELTRÚ</span><span>★</span>
+      <span>SANT PERE DE RIBES</span><span>★</span>
+      <span>PAN SIN GLUTEN DISPONIBLE</span><span>★</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">CIRCUS<span class="nav-logo-sub">SMASH</span></a>
+    <div class="nav-links">
+      <a href="#historia">Historia</a>
+      <a href="#menu">Menú</a>
+      <a href="#locales">Locales</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="https://www.ubereats.com/es-en/store/circus-smash-vilanova/SNbHA9ZiVL2prNHDFg7__g" class="nav-cta" target="_blank" rel="noopener">🛵 Pide en Uber Eats</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="checker-bg" id="checker-bg" aria-hidden="true"></div>
+    <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+    <div class="hero-content reveal">
+      <p class="hero-eyebrow">★ ¡Bienvenidos al espectáculo! ★</p>
+      <h1 class="hero-title">CIRCUS<br><span class="hero-title-accent">SMASH</span></h1>
+      <p class="hero-tagline">Burgers</p>
+      <p class="hero-sub">Burgers de carne seleccionada, doble cheddar y pan de patata. Dos locales en la provincia de Barcelona.</p>
+      <div class="hero-ctas">
+        <a href="https://www.ubereats.com/es-en/store/circus-smash-vilanova/SNbHA9ZiVL2prNHDFg7__g" class="btn btn-primary btn-confetti" target="_blank" rel="noopener">🛵 ¡Pide en Uber Eats!</a>
+        <a href="#menu" class="btn btn-outline">📋 Ver menú</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-value" data-count="2">0</span>
+          <span class="stat-label">Locales</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" data-count="100" data-suffix="%">0%</span>
+          <span class="stat-label">Carne seleccionada</span>
+        </div>
+      </div>
+
+      <!-- LIVE STATUS -->
+      <div class="live-status" id="live-status">
+        <span class="live-dot" id="live-dot"></span>
+        <span id="live-text">Comprobando horario…</span>
+      </div>
+      <div class="countdown-block" id="countdown-block" style="display:none">
+        <span class="countdown-label" id="countdown-label">Cierra en</span>
+        <div class="countdown-digits">
+          <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-sub">h</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-sub">min</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-sub">seg</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <span class="hero-badge-line">DESDE</span>
+      <span class="hero-badge-line">2024</span>
+    </div>
+    <div class="scroll-cue">
+      <span>Desliza</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- BIG TOP -->
+  <section class="bigtop">
+    <p>Nuestras burgers se sirven solas — añade patatas fritas por +3 €</p>
+  </section>
+
+  <!-- NUESTRA HISTORIA -->
+  <section id="historia" class="section historia-section">
+    <div class="historia-grid">
+      <div class="historia-text reveal">
+        <span class="section-eyebrow">🎪 Nuestra Historia</span>
+        <h2>De la idea al griddle</h2>
+        <p>Circus Smash nació de una idea simple: hacer la mejor smash burger de la zona, sin atajos. Pan de patata, carne seleccionada y una técnica de cocción que busca el máximo crujiente en cada bocado.</p>
+        <p>Empezamos en Sant Pere de Ribes y, gracias a la respuesta de nuestros clientes, abrimos un segundo local en Vilanova i la Geltrú. Dos carpas, un mismo espectáculo: el de una burger hecha como debe ser.</p>
+      </div>
+      <div class="historia-stats reveal">
+        <div class="historia-stat">
+          <span class="historia-stat-value" data-count="2">0</span>
+          <span class="historia-stat-label">Locales en Barcelona</span>
+        </div>
+        <div class="historia-stat">
+          <span class="historia-stat-value" data-count="100" data-suffix="%">0%</span>
+          <span class="historia-stat-label">Carne seleccionada</span>
+        </div>
+        <div class="historia-stat">
+          <span class="historia-stat-value" data-count="5" data-decimal="1" data-suffix="★">0★</span>
+          <span class="historia-stat-label">Valoración media en Google</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="section">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">🎪 El Menú</span>
+      <h2>¿Qué te vas a pedir?</h2>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar reveal" role="group" aria-label="Filtrar menú">
+      <button class="filter-btn active" data-filter="all">Todo</button>
+      <button class="filter-btn" data-filter="picante">🌶️ Picante</button>
+      <button class="filter-btn" data-filter="veggie">🌱 Veggie</button>
+      <button class="filter-btn" data-filter="pollo">🍗 Pollo</button>
+      <button class="filter-btn" data-filter="clasica">🍔 Clásicas</button>
+    </div>
+
+    <!-- Burgers -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle active" data-target="grp-burgers">
+        <span class="menu-group-icon">🍔</span>
+        <span class="menu-group-name">Burgers</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-burgers">
+        <p class="menu-group-note">ℹ️ Elaboradas con pan de patata, carne seleccionada y doble cheddar.</p>
+        <div class="menu-table">
+          <div class="menu-row menu-row-head">
+            <span>Burger</span><span>Simple</span><span>Doble</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Cheeseburger</strong></span><span>9 €</span><span>11 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Royal</strong><br><small>Cebolla picada, pickle, mostaza, ketchup</small></span><span>10 €</span><span>12 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Oklahoma</strong><br><small>Cebolla smash, mayonesa Circus</small></span><span>11 €</span><span>13 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Stacker Bacon</strong><br><small>Bacon, pickle, salsa Stacker</small></span><span>12 €</span><span>14 €</span>
+          </div>
+          <div class="menu-row" data-tags="picante">
+            <span><strong>BLT 🌶️</strong><br><small>Lechuga, tomate, bacon, salsa chipotle</small></span><span>12 €</span><span>14 €</span>
+          </div>
+          <div class="menu-row" data-tags="picante">
+            <span><strong>Bacon Jam 🌶️</strong><br><small>Bacon, mermelada bacon, salsa chipotle</small></span><span>12 €</span><span>14 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Big Circus</strong><br><small>Lechuga, cebolla picada, pickle, salsa Circus</small></span><span>12 €</span><span>14 €</span>
+          </div>
+        </div>
+
+        <p class="menu-group-note" style="margin-top:28px;">Pollo &amp; Veggie</p>
+        <div class="menu-grid">
+          <article class="menu-card" data-tags="pollo picante">
+            <span class="menu-tag">🌶️🌶️ Pollo</span>
+            <h4>Chicken Buffalo</h4>
+            <p>Pollo frito, salsa buffalo, lechuga, pickle, mayo jalapeños</p>
+            <span class="menu-price">14 €</span>
+          </article>
+          <article class="menu-card" data-tags="pollo">
+            <span class="menu-tag">Pollo</span>
+            <h4>Chicken Circus</h4>
+            <p>Pollo frito, cheddar, lechuga, salsa Circus</p>
+            <span class="menu-price">14 €</span>
+          </article>
+          <article class="menu-card" data-tags="pollo">
+            <span class="menu-tag">Pollo</span>
+            <h4>Chicken Honey</h4>
+            <p>Pollo frito, bacon, lechuga, mostaza con miel</p>
+            <span class="menu-price">14 €</span>
+          </article>
+          <article class="menu-card" data-tags="veggie picante">
+            <span class="menu-tag">🌶️ Veggie</span>
+            <h4>Pakoras</h4>
+            <p>Pakoras de coliflor, pickle, lechuga, mayonesa jalapeños</p>
+            <span class="menu-price">10 €</span>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para Picar -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle" data-target="grp-picar">
+        <span class="menu-group-icon">🍟</span>
+        <span class="menu-group-name">Para Picar</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-picar">
+        <div class="menu-grid menu-grid-list">
+          <div class="menu-list-row"><span>Patatas Fritas</span><span>7,5 €</span></div>
+          <div class="menu-list-row"><span>Patatas / Queso Cheddar / Bacon Jam</span><span>9,5 €</span></div>
+          <div class="menu-list-row"><span>Pakoras / Mayo Butter Milk / Sriracha</span><span>8,5 €</span></div>
+          <div class="menu-list-row"><span>Chicken Popcorn</span><span>9,5 €</span></div>
+          <div class="menu-list-row"><span>Alitas Fritas con Salsa BBQ</span><span>9,5 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Postres -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle" data-target="grp-postres">
+        <span class="menu-group-icon">🍰</span>
+        <span class="menu-group-name">Postres</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-postres">
+        <div class="menu-grid menu-grid-list">
+          <div class="menu-list-row"><span>Smash Nutella</span><span>5 €</span></div>
+          <div class="menu-list-row"><span>Cheesecake de Cacahuete</span><span>6,5 €</span></div>
+          <div class="menu-list-row"><span>Tres Leches</span><span>6,5 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bebidas -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle" data-target="grp-bebidas">
+        <span class="menu-group-icon">🥤</span>
+        <span class="menu-group-name">Bebidas</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-bebidas">
+        <div class="menu-grid menu-grid-list">
+          <div class="menu-list-row"><span>Refrescos Clásicos <small>Agua, Coca-Cola, Zero, Aquarius, Nestea</small></span><span>desde 1,8 €</span></div>
+          <div class="menu-list-row"><span>Sodas Especiales <small>Lima y Jengibre · Mandarina y Maracuyá · Limonada de Granada · Gingerbeer</small></span><span>3,5 €</span></div>
+          <div class="menu-list-row"><span>Michelada</span><span>6 €</span></div>
+          <div class="menu-list-row"><span>Cervezas Artesanas <small>APA / IPA / Roja</small></span><span>Consultar</span></div>
+          <div class="menu-list-row"><span>Copa de Vino</span><span>3,5 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extras + Sauces -->
+    <div class="extras-grid reveal">
+      <div class="extras-card">
+        <h4>➕ Extras</h4>
+        <ul>
+          <li>Pan sin gluten (+2 €)</li>
+          <li>Bacon, Queso, Jalapeños, Mermelada Bacon (+1,5 €)</li>
+          <li>Tomate, Cebolla Smash, Pickle (+1 €)</li>
+          <li>Lechuga, Cebolla (+0,5 €)</li>
+        </ul>
+      </div>
+      <div class="extras-card">
+        <h4>🥫 Salsas (+0,5 €)</h4>
+        <div class="sauce-pills">
+          <span>Stacker</span><span>Chipotle</span><span>Circus</span><span>Mostaza y Miel</span><span>Jalapeños</span><span>Buffalo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALES -->
+  <section id="locales" class="section section-dark">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">📍 Nuestros Locales</span>
+      <h2>¿Dónde encontrarnos?</h2>
+      <p class="section-intro">Dos locales en la provincia de Barcelona para disfrutar del espectáculo.</p>
+    </div>
+
+    <!-- LOCATION SWITCHER -->
+    <div class="loc-switcher reveal" role="group" aria-label="Elige un local">
+      <button class="loc-switch-btn active" data-loc="vilanova">Vilanova i la Geltrú</button>
+      <button class="loc-switch-btn" data-loc="ribes">Sant Pere de Ribes</button>
+    </div>
+
+    <div class="loc-panel active reveal" id="loc-vilanova">
+      <div class="location-grid-single">
+        <article class="location-card">
+          <span class="location-num">Local 1 🎪</span>
+          <h3>Vilanova i la Geltrú</h3>
+          <p class="location-line">📍 Carrer de la Llibertat, 4<br>08800 Vilanova i la Geltrú, Barcelona</p>
+          <p class="location-line">📞 <a href="tel:932158585">932 15 85 85</a></p>
+          <div class="hours-table">
+            <p class="hours-title">🕐 Horario</p>
+            <div class="hours-row"><span>Lunes</span><span>Cerrado</span></div>
+            <div class="hours-row"><span>Martes – Jueves</span><span>19:30 – 22:30</span></div>
+            <div class="hours-row"><span>Viernes – Sábado</span><span>12:30–15:30 · 19:30–23:00</span></div>
+            <div class="hours-row"><span>Domingo</span><span>12:30–15:30 · 19:30–22:30</span></div>
+          </div>
+          <a class="btn btn-outline" href="https://maps.google.com/?q=Carrer+de+la+Llibertat+4+Vilanova+i+la+Geltru" target="_blank" rel="noopener">🗺️ Cómo llegar</a>
+        </article>
+        <div class="location-map-cta">
+          <div class="map-cta-inner">
+            <span class="map-cta-icon">🗺️</span>
+            <p class="map-cta-name">Vilanova i la Geltrú</p>
+            <p class="map-cta-addr">Carrer de la Llibertat, 4</p>
+            <a class="btn btn-primary" href="https://maps.google.com/?q=Carrer+de+la+Llibertat+4+Vilanova+i+la+Geltru" target="_blank" rel="noopener">Abrir en Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loc-panel" id="loc-ribes">
+      <div class="location-grid-single">
+        <article class="location-card">
+          <span class="location-num">Local 2 🎪</span>
+          <h3>Sant Pere de Ribes</h3>
+          <p class="location-line">📍 Carrer de Sant Pere, 10<br>08810 Sant Pere de Ribes, Barcelona</p>
+          <p class="location-line">📞 <a href="tel:933597174">933 59 71 74</a></p>
+          <div class="hours-table">
+            <p class="hours-title">🕐 Horario</p>
+            <div class="hours-row"><span>Lunes – Jueves</span><span>18:00 – 23:00</span></div>
+            <div class="hours-row"><span>Viernes – Sábado</span><span>12:00–16:00 · 18:00–00:00</span></div>
+            <div class="hours-row"><span>Domingo</span><span>12:00–16:00 · 18:00–23:00</span></div>
+          </div>
+          <a class="btn btn-outline" href="https://maps.google.com/?q=Carrer+de+Sant+Pere+10+Sant+Pere+de+Ribes" target="_blank" rel="noopener">🗺️ Cómo llegar</a>
+        </article>
+        <div class="location-map-cta">
+          <div class="map-cta-inner">
+            <span class="map-cta-icon">🗺️</span>
+            <p class="map-cta-name">Sant Pere de Ribes</p>
+            <p class="map-cta-addr">Carrer de Sant Pere, 10</p>
+            <a class="btn btn-primary" href="https://maps.google.com/?q=Carrer+de+Sant+Pere+10+Sant+Pere+de+Ribes" target="_blank" rel="noopener">Abrir en Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEÑAS -->
+  <section id="resenas" class="section">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">⭐ Reseñas</span>
+      <h2>Lo que dicen nuestros fans</h2>
+    </div>
+    <div class="review-grid">
+      <article class="review-card reveal">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"¡La mejor burger de la ciudad, sin duda! ¡Hay que probarla sí o sí!"</p>
+        <div class="review-footer">
+          <span class="review-avatar">A</span>
+          <div>
+            <p class="review-author">Artiom J.</p>
+            <p class="review-loc">📍 Vilanova i la Geltrú · Google</p>
+          </div>
+        </div>
+      </article>
+      <article class="review-card reveal">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"¡Y además tienen pan sin gluten! Absolutamente impecable, nada que envidiar a Vicio."</p>
+        <div class="review-footer">
+          <span class="review-avatar">M</span>
+          <div>
+            <p class="review-author">María T.</p>
+            <p class="review-loc">📍 Sant Pere de Ribes · Google</p>
+          </div>
+        </div>
+      </article>
+      <article class="review-card reveal">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"Sin duda la mejor hamburguesa que he comido en toda la zona... el Bacon Stacker es la perfección."</p>
+        <div class="review-footer">
+          <span class="review-avatar">C</span>
+          <div>
+            <p class="review-author">Carlito Mk</p>
+            <p class="review-loc">📍 Sant Pere de Ribes · Google</p>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="review-summary reveal">
+      <span class="review-summary-score" data-count="5" data-decimal="1">0.0</span>
+      <div>
+        <p class="review-summary-stars">★★★★★</p>
+        <p class="review-summary-text">Basado en reseñas de Google — nuestros clientes nos avalan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEDIR -->
+  <section id="pedir" class="section order-section">
+    <div class="order-box reveal">
+      <span class="order-eyebrow">🎡 ¡Hora de Pedir!</span>
+      <h2>¿Listo para el espectáculo?</h2>
+      <p>Pide online o a domicilio con Uber Eats. Disponible en nuestros dos locales.</p>
+      <div class="order-ctas">
+        <a class="btn btn-primary btn-confetti" href="https://www.ubereats.com/es-en/store/circus-smash-vilanova/SNbHA9ZiVL2prNHDFg7__g" target="_blank" rel="noopener">🛵 ¡Pide en Uber Eats!</a>
+        <a class="btn btn-outline" href="#locales">📋 Pide online</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-logo">CIRCUS SMASH</p>
+    <div class="footer-links">
+      <a href="#menu">Menú</a>
+      <a href="#locales">Locales</a>
+      <a href="#resenas">Reseñas</a>
+    </div>
+    <p class="footer-locs">📍 Vilanova i la Geltrú &nbsp;·&nbsp; 📍 Sant Pere de Ribes</p>
+    <p class="footer-small">© 2026 Circus Smash. Todos los derechos reservados.</p>
+    <p class="footer-credit">Designed by <span class="footer-credit-name">Merlin Wiart</span></p>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">▲</button>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

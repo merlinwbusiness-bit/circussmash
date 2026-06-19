@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circus Smash — Smash Burgers</title>
+<meta name="description" content="Circus Smash: smash burgers, pollo, veggie y postres en Vilanova i la Geltrú y Sant Pere de Ribes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Monoton&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CIRCUS SMASH v4 — Black / White / Red
+   Full animations: parallax, bounces, reveals, filters
+   ============================================ */
+
+:root {
+  --white: #FFFFFF;
+  --offwhite: #F7F5F2;
+  --black: #161616;
+  --red: #E11D2A;
+  --red-dark: #B5141F;
+  --line: rgba(22,22,22,0.12);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Archivo', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+a { color: inherit; }
+
+/* ============ REVEAL ANIMATIONS ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal:nth-child(3) { transition-delay: 0.2s; }
+.review-card.reveal:nth-child(1) { transition-delay: 0s; }
+.review-card.reveal:nth-child(2) { transition-delay: 0.15s; }
+.review-card.reveal:nth-child(3) { transition-delay: 0.3s; }
+
+/* ============ TICKER ============ */
+.ticker {
+  background: var(--black);
+  color: var(--white);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+}
+.ticker-track {
+  display: inline-flex;
+  gap: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: ticker 30s linear infinite;
+}
+.ticker-track span:nth-child(even) { color: var(--red); }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ============ NAV ============ */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 4px solid var(--black);
+  transition: box-shadow 0.3s ease;
+}
+.nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.12); }
+.nav-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  color: var(--red);
+  -webkit-text-stroke: 1.5px var(--black);
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.nav-logo:hover { transform: scale(1.06) rotate(-1deg); }
+.nav-logo-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--black);
+  -webkit-text-stroke: 0;
+  margin-top: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.nav-links a:not(.nav-cta) {
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 0; height: 2px;
+  background: var(--red);
+  transition: width 0.25s ease;
+}
+.nav-links a:not(.nav-cta):hover { color: var(--red); }
+.nav-links a:not(.nav-cta):hover::after { width: 100%; }
+.nav-cta {
+  background: var(--red);
+  color: var(--white);
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--black);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 3px 3px 0 var(--black);
+}
+.nav-cta:hover {
+  background: var(--black);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--black);
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  overflow: hidden;
+}
+
+.checker-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(45deg, var(--red) 25%, transparent 25%, transparent 75%, var(--red) 75%),
+    linear-gradient(45deg, var(--red) 25%, transparent 25%, transparent 75%, var(--red) 75%);
+  background-size: 80px 80px;
+  background-position: 0 0, 40px 40px;
+  opacity: 0.08;
+  will-change: transform;
+}
+
+.confetti-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0%   { opacity: 1; transform: translateY(-20px) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  margin: 0 0 20px;
+  text-transform: uppercase;
+  animation: fadeSlideUp 0.8s 0.2s both;
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 11vw, 7rem);
+  line-height: 0.95;
+  margin-bottom: 8px;
+  color: var(--black);
+  animation: heroTitleIn 0.9s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+.hero-title-accent {
+  color: var(--red);
+  -webkit-text-stroke: 3px var(--black);
+  display: inline-block;
+  animation: bounceIn 0.9s 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+@keyframes heroTitleIn {
+  from { opacity: 0; transform: translateY(40px) skewY(3deg); }
+  to   { opacity: 1; transform: translateY(0) skewY(0); }
+}
+@keyframes bounceIn {
+  from { opacity: 0; transform: scale(0.7) rotate(-4deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tagline {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--black);
+  margin: 0 0 20px;
+  opacity: 0.5;
+  animation: fadeSlideUp 0.7s 0.7s both;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--black);
+  max-width: 480px;
+  margin-bottom: 36px;
+  animation: fadeSlideUp 0.7s 0.8s both;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  animation: fadeSlideUp 0.7s 0.9s both;
+}
+
+.btn {
+  display: inline-block;
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 999px;
+  border: 3px solid var(--black);
+  transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 4px 4px 0 var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.btn:hover::before { transform: translateX(0); }
+.btn:hover {
+  transform: translate(2px, 2px) scale(1.03);
+  box-shadow: 2px 2px 0 var(--black);
+}
+.btn:active { transform: translate(4px, 4px); box-shadow: none; }
+.btn-primary { background: var(--red); color: var(--white); }
+.btn-primary:hover { background: var(--red-dark); }
+.btn-outline { background: var(--white); color: var(--black); }
+.btn-outline:hover { background: var(--offwhite); }
+
+.hero-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.7s 1s both;
+}
+.stat-card {
+  background: var(--white);
+  border: 3px solid var(--black);
+  border-radius: 14px;
+  padding: 14px 22px;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--red);
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+}
+.stat-card:hover {
+  transform: translateY(-4px) rotate(-1deg);
+  box-shadow: 6px 8px 0 var(--red);
+}
+.stat-value {
+  display: block;
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--red);
+}
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  opacity: 0.6;
+}
+
+/* LIVE STATUS */
+.live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  box-shadow: 3px 3px 0 var(--black);
+  animation: fadeSlideUp 0.7s 1.1s both;
+}
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #aaa;
+  flex-shrink: 0;
+}
+.live-dot.open { background: #22c55e; animation: livePulse 1.5s ease-in-out infinite; }
+.live-dot.closed { background: var(--red); }
+@keyframes livePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+}
+
+.hero-badge {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 2;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 5px solid var(--black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  color: var(--white);
+  animation: badge-spin 16s linear infinite;
+  cursor: default;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.hero-badge:hover { animation-play-state: paused; transform: scale(1.15) rotate(15deg); }
+@keyframes badge-spin {
+  from { transform: rotate(12deg); }
+  to   { transform: rotate(372deg); }
+}
+.hero-badge-line { font-size: 1.2rem; line-height: 1.2; }
+
+/* SCROLL CUE */
+.scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(22,22,22,0.45);
+  animation: fadeSlideUp 0.7s 1.3s both;
+}
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--red), transparent);
+  animation: scrollBounce 1.8s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: scaleY(1); opacity: 0.5; }
+  50% { transform: scaleY(1.3); opacity: 1; }
+}
+
+/* ============ BIG TOP STRIP ============ */
+.bigtop {
+  background-image:
+    linear-gradient(45deg, var(--black) 25%, transparent 25%, transparent 75%, var(--black) 75%),
+    linear-gradient(45deg, var(--black) 25%, transparent 25%, transparent 75%, var(--black) 75%);
+  background-size: 56px 56px;
+  background-position: 0 0, 28px 28px;
+  background-color: var(--red);
+  padding: 24px 40px;
+  text-align: center;
+}
+.bigtop p {
+  margin: 0;
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.95rem, 2.2vw, 1.3rem);
+  color: var(--black);
+  background: var(--white);
+  display: inline-block;
+  padding: 10px 28px;
+  border: 3px solid var(--black);
+  border-radius: 999px;
+  animation: wiggle 4s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(-0.8deg); }
+  75% { transform: rotate(0.8deg); }
+}
+
+/* ============ NUESTRA HISTORIA ============ */
+.historia-section { background: var(--offwhite); }
+.historia-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.historia-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(22,22,22,0.75);
+  margin: 16px 0 0;
+}
+.historia-text h2 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); margin: 8px 0 0; }
+.historia-stats { display: flex; flex-direction: column; gap: 16px; }
+.historia-stat {
+  background: var(--white);
+  border: 3px solid var(--black);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 5px 5px 0 var(--red);
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+}
+.historia-stat:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--red);
+}
+.historia-stat-value {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  color: var(--red);
+}
+.historia-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-align: right;
+  color: rgba(22,22,22,0.6);
+  max-width: 140px;
+}
+
+/* ============ SECTIONS ============ */
+.section {
+  padding: 90px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-dark {
+  max-width: none;
+  background: var(--black);
+  color: var(--white);
+}
+.section-dark > * {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-dark .section-intro { color: rgba(255,255,255,0.65); }
+.section-head { max-width: 640px; margin-bottom: 48px; }
+.section-eyebrow {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.section-head h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
+.section-intro { font-size: 1.05rem; line-height: 1.7; color: rgba(22,22,22,0.7); }
+
+/* ============ FILTER BAR ============ */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.filter-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2px solid var(--black);
+  background: var(--white);
+  color: var(--black);
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 3px 3px 0 var(--black);
+}
+.filter-btn:hover {
+  transform: translate(1px,1px) scale(1.04);
+  box-shadow: 2px 2px 0 var(--black);
+}
+.filter-btn.active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  transform: translate(2px,2px);
+  box-shadow: 1px 1px 0 var(--black);
+}
+
+/* filtered out rows/cards */
+.menu-row.hidden-filter,
+.menu-card.hidden-filter {
+  display: none !important;
+}
+
+/* ============ MENU ACCORDION ============ */
+.menu-group {
+  border: 3px solid var(--black);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  background: var(--white);
+  transition: box-shadow 0.25s ease;
+}
+.menu-group:hover { box-shadow: 5px 5px 0 var(--red); }
+.menu-group-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--white);
+  border: none;
+  padding: 20px 24px;
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: left;
+  color: var(--black);
+  transition: background 0.2s ease;
+}
+.menu-group-toggle:hover { background: var(--offwhite); }
+.menu-group-icon { font-size: 1.4rem; }
+.menu-group-name { flex: 1; }
+.menu-group-arrow {
+  font-size: 1rem;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  color: var(--red);
+}
+.menu-group-toggle.active .menu-group-arrow { transform: rotate(180deg); }
+.menu-group-body {
+  padding: 0 24px 24px;
+  display: none;
+  animation: slideDown 0.35s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.menu-group-toggle.active + .menu-group-body { display: block; }
+.menu-group-note { font-size: 0.85rem; color: rgba(22,22,22,0.6); margin: 0 0 16px; }
+
+/* Smash burgers table */
+.menu-table {
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.menu-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 2px dashed var(--line);
+  gap: 10px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.menu-row:not(.menu-row-head):hover {
+  background: var(--offwhite);
+  transform: translateX(4px);
+}
+.menu-row:last-child { border-bottom: none; }
+.menu-row span:nth-child(2), .menu-row span:nth-child(3) {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  text-align: right;
+}
+.menu-row small {
+  display: block;
+  color: rgba(22,22,22,0.55);
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-top: 2px;
+}
+.menu-row-head {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.menu-row-head span:nth-child(2),
+.menu-row-head span:nth-child(3) { text-align: right; }
+
+/* Card grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.menu-card {
+  background: var(--offwhite);
+  border: 2px solid var(--black);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+}
+.menu-card:hover {
+  transform: translateY(-5px) rotate(0.5deg);
+  box-shadow: 5px 5px 0 var(--red);
+}
+.menu-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 2px solid var(--red);
+  color: var(--red);
+  width: fit-content;
+}
+.menu-card h4 { font-size: 1.05rem; }
+.menu-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: rgba(22,22,22,0.7); }
+.menu-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--red);
+  margin-top: auto;
+  font-size: 1.05rem;
+}
+
+/* List rows */
+.menu-grid-list { display: flex; flex-direction: column; }
+.menu-list-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 4px;
+  border-bottom: 2px dashed var(--line);
+  font-size: 0.92rem;
+  transition: background 0.2s ease, padding-left 0.2s ease;
+  border-radius: 6px;
+}
+.menu-list-row:hover { background: var(--offwhite); padding-left: 10px; }
+.menu-list-row:last-child { border-bottom: none; }
+.menu-list-row small {
+  display: block;
+  color: rgba(22,22,22,0.55);
+  font-size: 0.78rem;
+  margin-top: 2px;
+}
+.menu-list-row span:last-child {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+/* Extras */
+.extras-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 24px;
+}
+.extras-card {
+  background: var(--offwhite);
+  border: 3px solid var(--black);
+  border-radius: 14px;
+  padding: 22px 24px;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.extras-card:hover { transform: translateY(-3px); }
+.extras-card h4 { margin-bottom: 12px; font-size: 1rem; }
+.extras-card ul { margin: 0; padding-left: 20px; font-size: 0.88rem; line-height: 1.7; }
+.sauce-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.sauce-pills span {
+  background: var(--white);
+  border: 2px solid var(--red);
+  color: var(--red);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: default;
+  transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+.sauce-pills span:hover {
+  background: var(--red);
+  color: var(--white);
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* ============ LOCATION SWITCHER ============ */
+.loc-switcher {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.loc-switch-btn {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 3px solid rgba(255,255,255,0.3);
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 3px 3px 0 rgba(255,255,255,0.1);
+}
+.loc-switch-btn:hover {
+  border-color: rgba(255,255,255,0.7);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.loc-switch-btn.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+  box-shadow: 4px 4px 0 rgba(255,255,255,0.2);
+  transform: translate(2px,2px);
+}
+
+.loc-panel { display: none; }
+.loc-panel.active { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.location-grid-single {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.location-card {
+  background: var(--white);
+  color: var(--black);
+  border-radius: 14px;
+  padding: 32px;
+  border: 3px solid var(--red);
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+}
+.location-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+.location-num {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.location-card h3 { font-size: 1.5rem; margin-bottom: 14px; }
+.location-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  margin: 0 0 6px;
+  color: rgba(22,22,22,0.7);
+  line-height: 1.6;
+}
+.location-line a { color: var(--red); text-decoration: none; }
+.hours-table {
+  margin: 16px 0;
+  border-top: 2px dashed var(--line);
+  padding-top: 12px;
+}
+.hours-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  color: rgba(22,22,22,0.5);
+}
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  padding: 4px 0;
+}
+.hours-row span:first-child { color: rgba(22,22,22,0.6); }
+.location-card .btn { margin-top: 12px; }
+
+.location-map {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 3px solid rgba(255,255,255,0.2);
+  height: 100%;
+  min-height: 320px;
+}
+.location-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: none;
+  display: block;
+}
+
+/* ============ REVIEWS ============ */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.review-card {
+  background: var(--offwhite);
+  border: 3px solid var(--black);
+  border-radius: 14px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+}
+.review-card:hover {
+  transform: translateY(-6px) rotate(-0.5deg);
+  box-shadow: 6px 6px 0 var(--red);
+}
+.review-stars {
+  color: var(--red);
+  font-size: 1.1rem;
+  margin: 0;
+  letter-spacing: 2px;
+}
+.review-text {
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+  flex: 1;
+}
+.review-footer { display: flex; align-items: center; gap: 12px; }
+.review-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.review-card:hover .review-avatar { transform: scale(1.15) rotate(5deg); }
+.review-author { margin: 0; font-weight: 700; font-size: 0.9rem; }
+.review-loc {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgba(22,22,22,0.5);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.review-summary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--black);
+  color: var(--white);
+  border-radius: 14px;
+  padding: 28px 32px;
+}
+.review-summary-score {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 3.5rem;
+  color: var(--red);
+  line-height: 1;
+}
+.review-summary-stars { margin: 0 0 4px; color: var(--red); letter-spacing: 2px; }
+.review-summary-text { margin: 0; font-size: 0.9rem; opacity: 0.8; }
+
+/* ============ ORDER ============ */
+.order-section { padding: 0 40px 100px; }
+.order-box {
+  text-align: center;
+  background-image:
+    linear-gradient(45deg, var(--red) 25%, transparent 25%, transparent 75%, var(--red) 75%),
+    linear-gradient(45deg, var(--red) 25%, transparent 25%, transparent 75%, var(--red) 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  background-color: var(--offwhite);
+  border: 4px solid var(--black);
+  border-radius: 18px;
+  padding: 64px 32px;
+  transition: transform 0.3s ease;
+}
+.order-box:hover { transform: scale(1.01); }
+.order-eyebrow {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.order-box h2 {
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  margin-bottom: 16px;
+  color: var(--white);
+  -webkit-text-stroke: 2px var(--black);
+}
+.order-box > p {
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+  background: var(--white);
+  display: inline-block;
+  padding: 8px 24px;
+  border-radius: 999px;
+  border: 2px solid var(--black);
+}
+.order-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--black);
+  color: var(--white);
+}
+.footer-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--red);
+  -webkit-text-stroke: 1px var(--white);
+  margin-bottom: 16px;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  cursor: default;
+}
+.footer-logo:hover { transform: scale(1.05) rotate(-1deg); }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.footer-links a { text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--red); }
+.footer-locs { margin: 0 0 8px; font-size: 0.9rem; }
+.footer-small { font-size: 0.78rem; opacity: 0.5; margin: 0; }
+.footer-credit { font-size: 0.85rem; opacity: 0.7; margin: 16px 0 0; }
+.footer-credit-name {
+  font-family: 'Monoton', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+/* ============ BACK TO TOP ============ */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  border: 3px solid var(--black);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--black);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none;
+}
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 5px 7px 0 var(--black);
+}
+
+/* ============ MAP CTA ============ */
+.location-map-cta {
+  border-radius: 14px;
+  border: 3px solid rgba(255,255,255,0.2);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(225,29,42,0.15) 0 20px,
+    rgba(255,255,255,0.03) 20px 40px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s;
+}
+.location-map-cta:hover {
+  transform: translateY(-4px);
+  border-color: var(--red);
+}
+.map-cta-inner {
+  text-align: center;
+  padding: 32px;
+}
+.map-cta-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+  animation: mapBounce 2s ease-in-out infinite;
+}
+@keyframes mapBounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.map-cta-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  margin: 0 0 4px;
+}
+.map-cta-addr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  margin: 0 0 20px;
+}
+
+/* ============ COUNTDOWN ============ */
+.countdown-block {
+  margin-top: 14px;
+  animation: fadeSlideUp 0.5s ease both;
+}
+.countdown-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(22,22,22,0.5);
+  display: block;
+  margin-bottom: 8px;
+}
+.countdown-digits {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cd-unit {
+  background: var(--black);
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+  min-width: 62px;
+  box-shadow: 3px 3px 0 var(--red);
+}
+.cd-num {
+  display: block;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  line-height: 1;
+  transition: transform 0.15s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cd-num.tick { transform: scale(1.2); }
+.cd-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+.cd-sep {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.4rem;
+  color: var(--red);
+  animation: sepBlink 1s step-end infinite;
+}
+@keyframes sepBlink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+
+/* ============ EXTRA POWER ANIMATIONS ============ */
+
+/* Floating shapes bg in hero */
+.hero::after {
+  content: '🍔';
+  position: absolute;
+  font-size: 8rem;
+  opacity: 0.03;
+  right: 5%;
+  bottom: 10%;
+  z-index: 1;
+  animation: floatShape 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes floatShape {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-30px) rotate(12deg); }
+}
+
+/* Magnetic hover on stat cards */
+.stat-card { cursor: default; }
+
+/* Stagger menu group reveals */
+.menu-group:nth-child(1) { transition-delay: 0s; }
+.menu-group:nth-child(2) { transition-delay: 0.08s; }
+.menu-group:nth-child(3) { transition-delay: 0.16s; }
+.menu-group:nth-child(4) { transition-delay: 0.24s; }
+
+/* Historia stat number pop */
+.historia-stat-value {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  color: var(--red);
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.historia-stat:hover .historia-stat-value {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+/* Sauce pills explosion on hover */
+.sauce-pills span:nth-child(odd):hover  { transform: scale(1.15) rotate(-4deg); }
+.sauce-pills span:nth-child(even):hover { transform: scale(1.15) rotate(4deg); }
+
+/* Review card star shimmer */
+.review-stars {
+  background: linear-gradient(90deg, var(--red), #ff6b6b, var(--red));
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+/* Order box pulse border */
+.order-box {
+  animation: borderPulse 3s ease-in-out infinite;
+}
+@keyframes borderPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(225,29,42,0); }
+  50%      { box-shadow: 0 0 0 8px rgba(225,29,42,0.12); }
+}
+
+/* Ticker speed on hover */
+.ticker:hover .ticker-track { animation-duration: 10s; }
+
+/* Section eyebrow underline slide */
+.section-eyebrow {
+  display: inline-block;
+  position: relative;
+}
+.section-eyebrow::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0; height: 2px;
+  background: var(--red);
+  transition: width 0.5s ease;
+}
+.reveal.visible .section-eyebrow::after { width: 100%; }
+
+/* Btn ripple effect */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: scale(0);
+  animation: rippleAnim 0.6s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ============ RESPONSIVE BADGE FIX ============ */
+@media (max-width: 860px) {
+  .nav {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-logo { font-size: 1.2rem; }
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 14px;
+    font-size: 0.68rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { flex-shrink: 0; }
+  .nav-cta { padding: 7px 12px; }
+
+  .hero {
+    padding: 100px 20px 60px;
+    min-height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* Keep spinning on mobile but static position */
+  .hero-badge {
+    position: static;
+    margin: 28px 0 0;
+    width: 110px; height: 110px;
+    animation: badge-spin 16s linear infinite; /* keep the spin! */
+  }
+  .hero-title { font-size: clamp(2.6rem, 13vw, 4rem); }
+  .hero-tagline { font-size: 1.2rem; }
+  .hero-sub { font-size: 1rem; }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { text-align: center; }
+  .hero-stats { gap: 10px; }
+  .stat-card { padding: 10px 16px; flex: 1; }
+  .scroll-cue { display: none; }
+
+  .historia-grid { grid-template-columns: 1fr; gap: 28px; }
+  .historia-stat-label { max-width: none; }
+
+  .filter-bar { gap: 8px; }
+  .filter-btn { padding: 8px 14px; font-size: 0.7rem; }
+
+  .menu-row {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 4px;
+  }
+  .menu-row span:nth-child(2), .menu-row span:nth-child(3) {
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .menu-row span:nth-child(2)::before { content: "Simple: "; font-weight: 400; opacity: 0.6; }
+  .menu-row span:nth-child(3)::before { content: "Doble: "; font-weight: 400; opacity: 0.6; }
+  .menu-row-head { display: none; }
+
+  .menu-grid { grid-template-columns: 1fr; }
+  .extras-grid { grid-template-columns: 1fr; }
+
+  .loc-switcher { flex-direction: column; }
+  .loc-switch-btn { text-align: center; }
+  .location-grid-single { grid-template-columns: 1fr; }
+  .location-map-cta { min-height: 180px; }
+
+  .review-grid { grid-template-columns: 1fr; }
+  .review-summary { flex-direction: column; text-align: center; gap: 12px; }
+
+  .section { padding: 48px 20px; }
+  .section-head h2 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .order-section { padding: 0 20px 48px; }
+  .order-box { padding: 40px 20px; }
+  .order-ctas { flex-direction: column; align-items: stretch; }
+  .order-ctas .btn { text-align: center; }
+
+  .menu-group-toggle { padding: 16px 18px; font-size: 1.05rem; }
+  .menu-group-body { padding: 0 18px 18px; }
+
+  .back-to-top { bottom: 16px; right: 16px; width: 42px; height: 42px; }
+  .countdown-digits { flex-wrap: wrap; gap: 6px; }
+  .cd-unit { min-width: 52px; padding: 8px 10px; }
+  .cd-num { font-size: 1.3rem; }
+}
+
+@media (max-width: 420px) {
+  .hero-stats { flex-direction: column; }
+  .menu-row span:nth-child(2)::before { content: "S: "; }
+  .menu-row span:nth-child(3)::before { content: "D: "; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+}
+
+</style>
+</head>
+<body>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>SMASH BURGERS</span><span>★</span>
+      <span>VILANOVA I LA GELTRÚ</span><span>★</span>
+      <span>SANT PERE DE RIBES</span><span>★</span>
+      <span>PAN SIN GLUTEN DISPONIBLE</span><span>★</span>
+      <span>SMASH BURGERS</span><span>★</span>
+      <span>VILANOVA I LA GELTRÚ</span><span>★</span>
+      <span>SANT PERE DE RIBES</span><span>★</span>
+      <span>PAN SIN GLUTEN DISPONIBLE</span><span>★</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">CIRCUS<span class="nav-logo-sub">SMASH</span></a>
+    <div class="nav-links">
+      <a href="#historia">Historia</a>
+      <a href="#menu">Menú</a>
+      <a href="#locales">Locales</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="https://www.ubereats.com/es-en/store/circus-smash-vilanova/SNbHA9ZiVL2prNHDFg7__g" class="nav-cta" target="_blank" rel="noopener">🛵 Pide en Uber Eats</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="checker-bg" id="checker-bg" aria-hidden="true"></div>
+    <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+    <div class="hero-content reveal">
+      <p class="hero-eyebrow">★ ¡Bienvenidos al espectáculo! ★</p>
+      <h1 class="hero-title">CIRCUS<br><span class="hero-title-accent">SMASH</span></h1>
+      <p class="hero-tagline">Burgers</p>
+      <p class="hero-sub">Burgers de carne seleccionada, doble cheddar y pan de patata. Dos locales en la provincia de Barcelona.</p>
+      <div class="hero-ctas">
+        <a href="https://www.ubereats.com/es-en/store/circus-smash-vilanova/SNbHA9ZiVL2prNHDFg7__g" class="btn btn-primary btn-confetti" target="_blank" rel="noopener">🛵 ¡Pide en Uber Eats!</a>
+        <a href="#menu" class="btn btn-outline">📋 Ver menú</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-value" data-count="2">0</span>
+          <span class="stat-label">Locales</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" data-count="100" data-suffix="%">0%</span>
+          <span class="stat-label">Carne seleccionada</span>
+        </div>
+      </div>
+
+      <!-- LIVE STATUS -->
+      <div class="live-status" id="live-status">
+        <span class="live-dot" id="live-dot"></span>
+        <span id="live-text">Comprobando horario…</span>
+      </div>
+      <div class="countdown-block" id="countdown-block" style="display:none">
+        <span class="countdown-label" id="countdown-label">Cierra en</span>
+        <div class="countdown-digits">
+          <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-sub">h</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-sub">min</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-sub">seg</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <span class="hero-badge-line">DESDE</span>
+      <span class="hero-badge-line">2024</span>
+    </div>
+    <div class="scroll-cue">
+      <span>Desliza</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- BIG TOP -->
+  <section class="bigtop">
+    <p>Nuestras burgers se sirven solas — añade patatas fritas por +3 €</p>
+  </section>
+
+  <!-- NUESTRA HISTORIA -->
+  <section id="historia" class="section historia-section">
+    <div class="historia-grid">
+      <div class="historia-text reveal">
+        <span class="section-eyebrow">🎪 Nuestra Historia</span>
+        <h2>De la idea al griddle</h2>
+        <p>Circus Smash nació de una idea simple: hacer la mejor smash burger de la zona, sin atajos. Pan de patata, carne seleccionada y una técnica de cocción que busca el máximo crujiente en cada bocado.</p>
+        <p>Empezamos en Sant Pere de Ribes y, gracias a la respuesta de nuestros clientes, abrimos un segundo local en Vilanova i la Geltrú. Dos carpas, un mismo espectáculo: el de una burger hecha como debe ser.</p>
+      </div>
+      <div class="historia-stats reveal">
+        <div class="historia-stat">
+          <span class="historia-stat-value" data-count="2">0</span>
+          <span class="historia-stat-label">Locales en Barcelona</span>
+        </div>
+        <div class="historia-stat">
+          <span class="historia-stat-value" data-count="100" data-suffix="%">0%</span>
+          <span class="historia-stat-label">Carne seleccionada</span>
+        </div>
+        <div class="historia-stat">
+          <span class="historia-stat-value" data-count="5" data-decimal="1" data-suffix="★">0★</span>
+          <span class="historia-stat-label">Valoración media en Google</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="section">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">🎪 El Menú</span>
+      <h2>¿Qué te vas a pedir?</h2>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar reveal" role="group" aria-label="Filtrar menú">
+      <button class="filter-btn active" data-filter="all">Todo</button>
+      <button class="filter-btn" data-filter="picante">🌶️ Picante</button>
+      <button class="filter-btn" data-filter="veggie">🌱 Veggie</button>
+      <button class="filter-btn" data-filter="pollo">🍗 Pollo</button>
+      <button class="filter-btn" data-filter="clasica">🍔 Clásicas</button>
+    </div>
+
+    <!-- Burgers -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle active" data-target="grp-burgers">
+        <span class="menu-group-icon">🍔</span>
+        <span class="menu-group-name">Burgers</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-burgers">
+        <p class="menu-group-note">ℹ️ Elaboradas con pan de patata, carne seleccionada y doble cheddar.</p>
+        <div class="menu-table">
+          <div class="menu-row menu-row-head">
+            <span>Burger</span><span>Simple</span><span>Doble</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Cheeseburger</strong></span><span>9 €</span><span>11 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Royal</strong><br><small>Cebolla picada, pickle, mostaza, ketchup</small></span><span>10 €</span><span>12 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Oklahoma</strong><br><small>Cebolla smash, mayonesa Circus</small></span><span>11 €</span><span>13 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Stacker Bacon</strong><br><small>Bacon, pickle, salsa Stacker</small></span><span>12 €</span><span>14 €</span>
+          </div>
+          <div class="menu-row" data-tags="picante">
+            <span><strong>BLT 🌶️</strong><br><small>Lechuga, tomate, bacon, salsa chipotle</small></span><span>12 €</span><span>14 €</span>
+          </div>
+          <div class="menu-row" data-tags="picante">
+            <span><strong>Bacon Jam 🌶️</strong><br><small>Bacon, mermelada bacon, salsa chipotle</small></span><span>12 €</span><span>14 €</span>
+          </div>
+          <div class="menu-row" data-tags="clasica">
+            <span><strong>Big Circus</strong><br><small>Lechuga, cebolla picada, pickle, salsa Circus</small></span><span>12 €</span><span>14 €</span>
+          </div>
+        </div>
+
+        <p class="menu-group-note" style="margin-top:28px;">Pollo &amp; Veggie</p>
+        <div class="menu-grid">
+          <article class="menu-card" data-tags="pollo picante">
+            <span class="menu-tag">🌶️🌶️ Pollo</span>
+            <h4>Chicken Buffalo</h4>
+            <p>Pollo frito, salsa buffalo, lechuga, pickle, mayo jalapeños</p>
+            <span class="menu-price">14 €</span>
+          </article>
+          <article class="menu-card" data-tags="pollo">
+            <span class="menu-tag">Pollo</span>
+            <h4>Chicken Circus</h4>
+            <p>Pollo frito, cheddar, lechuga, salsa Circus</p>
+            <span class="menu-price">14 €</span>
+          </article>
+          <article class="menu-card" data-tags="pollo">
+            <span class="menu-tag">Pollo</span>
+            <h4>Chicken Honey</h4>
+            <p>Pollo frito, bacon, lechuga, mostaza con miel</p>
+            <span class="menu-price">14 €</span>
+          </article>
+          <article class="menu-card" data-tags="veggie picante">
+            <span class="menu-tag">🌶️ Veggie</span>
+            <h4>Pakoras</h4>
+            <p>Pakoras de coliflor, pickle, lechuga, mayonesa jalapeños</p>
+            <span class="menu-price">10 €</span>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para Picar -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle" data-target="grp-picar">
+        <span class="menu-group-icon">🍟</span>
+        <span class="menu-group-name">Para Picar</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-picar">
+        <div class="menu-grid menu-grid-list">
+          <div class="menu-list-row"><span>Patatas Fritas</span><span>7,5 €</span></div>
+          <div class="menu-list-row"><span>Patatas / Queso Cheddar / Bacon Jam</span><span>9,5 €</span></div>
+          <div class="menu-list-row"><span>Pakoras / Mayo Butter Milk / Sriracha</span><span>8,5 €</span></div>
+          <div class="menu-list-row"><span>Chicken Popcorn</span><span>9,5 €</span></div>
+          <div class="menu-list-row"><span>Alitas Fritas con Salsa BBQ</span><span>9,5 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Postres -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle" data-target="grp-postres">
+        <span class="menu-group-icon">🍰</span>
+        <span class="menu-group-name">Postres</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-postres">
+        <div class="menu-grid menu-grid-list">
+          <div class="menu-list-row"><span>Smash Nutella</span><span>5 €</span></div>
+          <div class="menu-list-row"><span>Cheesecake de Cacahuete</span><span>6,5 €</span></div>
+          <div class="menu-list-row"><span>Tres Leches</span><span>6,5 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bebidas -->
+    <div class="menu-group reveal">
+      <button class="menu-group-toggle" data-target="grp-bebidas">
+        <span class="menu-group-icon">🥤</span>
+        <span class="menu-group-name">Bebidas</span>
+        <span class="menu-group-arrow">▾</span>
+      </button>
+      <div class="menu-group-body" id="grp-bebidas">
+        <div class="menu-grid menu-grid-list">
+          <div class="menu-list-row"><span>Refrescos Clásicos <small>Agua, Coca-Cola, Zero, Aquarius, Nestea</small></span><span>desde 1,8 €</span></div>
+          <div class="menu-list-row"><span>Sodas Especiales <small>Lima y Jengibre · Mandarina y Maracuyá · Limonada de Granada · Gingerbeer</small></span><span>3,5 €</span></div>
+          <div class="menu-list-row"><span>Michelada</span><span>6 €</span></div>
+          <div class="menu-list-row"><span>Cervezas Artesanas <small>APA / IPA / Roja</small></span><span>Consultar</span></div>
+          <div class="menu-list-row"><span>Copa de Vino</span><span>3,5 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extras + Sauces -->
+    <div class="extras-grid reveal">
+      <div class="extras-card">
+        <h4>➕ Extras</h4>
+        <ul>
+          <li>Pan sin gluten (+2 €)</li>
+          <li>Bacon, Queso, Jalapeños, Mermelada Bacon (+1,5 €)</li>
+          <li>Tomate, Cebolla Smash, Pickle (+1 €)</li>
+          <li>Lechuga, Cebolla (+0,5 €)</li>
+        </ul>
+      </div>
+      <div class="extras-card">
+        <h4>🥫 Salsas (+0,5 €)</h4>
+        <div class="sauce-pills">
+          <span>Stacker</span><span>Chipotle</span><span>Circus</span><span>Mostaza y Miel</span><span>Jalapeños</span><span>Buffalo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALES -->
+  <section id="locales" class="section section-dark">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">📍 Nuestros Locales</span>
+      <h2>¿Dónde encontrarnos?</h2>
+      <p class="section-intro">Dos locales en la provincia de Barcelona para disfrutar del espectáculo.</p>
+    </div>
+
+    <!-- LOCATION SWITCHER -->
+    <div class="loc-switcher reveal" role="group" aria-label="Elige un local">
+      <button class="loc-switch-btn active" data-loc="vilanova">Vilanova i la Geltrú</button>
+      <button class="loc-switch-btn" data-loc="ribes">Sant Pere de Ribes</button>
+    </div>
+
+    <div class="loc-panel active reveal" id="loc-vilanova">
+      <div class="location-grid-single">
+        <article class="location-card">
+          <span class="location-num">Local 1 🎪</span>
+          <h3>Vilanova i la Geltrú</h3>
+          <p class="location-line">📍 Carrer de la Llibertat, 4<br>08800 Vilanova i la Geltrú, Barcelona</p>
+          <p class="location-line">📞 <a href="tel:932158585">932 15 85 85</a></p>
+          <div class="hours-table">
+            <p class="hours-title">🕐 Horario</p>
+            <div class="hours-row"><span>Lunes</span><span>Cerrado</span></div>
+            <div class="hours-row"><span>Martes – Jueves</span><span>19:30 – 22:30</span></div>
+            <div class="hours-row"><span>Viernes – Sábado</span><span>12:30–15:30 · 19:30–23:00</span></div>
+            <div class="hours-row"><span>Domingo</span><span>12:30–15:30 · 19:30–22:30</span></div>
+          </div>
+          <a class="btn btn-outline" href="https://maps.google.com/?q=Carrer+de+la+Llibertat+4+Vilanova+i+la+Geltru" target="_blank" rel="noopener">🗺️ Cómo llegar</a>
+        </article>
+        <div class="location-map-cta">
+          <div class="map-cta-inner">
+            <span class="map-cta-icon">🗺️</span>
+            <p class="map-cta-name">Vilanova i la Geltrú</p>
+            <p class="map-cta-addr">Carrer de la Llibertat, 4</p>
+            <a class="btn btn-primary" href="https://maps.google.com/?q=Carrer+de+la+Llibertat+4+Vilanova+i+la+Geltru" target="_blank" rel="noopener">Abrir en Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loc-panel" id="loc-ribes">
+      <div class="location-grid-single">
+        <article class="location-card">
+          <span class="location-num">Local 2 🎪</span>
+          <h3>Sant Pere de Ribes</h3>
+          <p class="location-line">📍 Carrer de Sant Pere, 10<br>08810 Sant Pere de Ribes, Barcelona</p>
+          <p class="location-line">📞 <a href="tel:933597174">933 59 71 74</a></p>
+          <div class="hours-table">
+            <p class="hours-title">🕐 Horario</p>
+            <div class="hours-row"><span>Lunes – Jueves</span><span>18:00 – 23:00</span></div>
+            <div class="hours-row"><span>Viernes – Sábado</span><span>12:00–16:00 · 18:00–00:00</span></div>
+            <div class="hours-row"><span>Domingo</span><span>12:00–16:00 · 18:00–23:00</span></div>
+          </div>
+          <a class="btn btn-outline" href="https://maps.google.com/?q=Carrer+de+Sant+Pere+10+Sant+Pere+de+Ribes" target="_blank" rel="noopener">🗺️ Cómo llegar</a>
+        </article>
+        <div class="location-map-cta">
+          <div class="map-cta-inner">
+            <span class="map-cta-icon">🗺️</span>
+            <p class="map-cta-name">Sant Pere de Ribes</p>
+            <p class="map-cta-addr">Carrer de Sant Pere, 10</p>
+            <a class="btn btn-primary" href="https://maps.google.com/?q=Carrer+de+Sant+Pere+10+Sant+Pere+de+Ribes" target="_blank" rel="noopener">Abrir en Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEÑAS -->
+  <section id="resenas" class="section">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">⭐ Reseñas</span>
+      <h2>Lo que dicen nuestros fans</h2>
+    </div>
+    <div class="review-grid">
+      <article class="review-card reveal">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"¡La mejor burger de la ciudad, sin duda! ¡Hay que probarla sí o sí!"</p>
+        <div class="review-footer">
+          <span class="review-avatar">A</span>
+          <div>
+            <p class="review-author">Artiom J.</p>
+            <p class="review-loc">📍 Vilanova i la Geltrú · Google</p>
+          </div>
+        </div>
+      </article>
+      <article class="review-card reveal">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"¡Y además tienen pan sin gluten! Absolutamente impecable, nada que envidiar a Vicio."</p>
+        <div class="review-footer">
+          <span class="review-avatar">M</span>
+          <div>
+            <p class="review-author">María T.</p>
+            <p class="review-loc">📍 Sant Pere de Ribes · Google</p>
+          </div>
+        </div>
+      </article>
+      <article class="review-card reveal">
+        <p class="review-stars">★★★★★</p>
+        <p class="review-text">"Sin duda la mejor hamburguesa que he comido en toda la zona... el Bacon Stacker es la perfección."</p>
+        <div class="review-footer">
+          <span class="review-avatar">C</span>
+          <div>
+            <p class="review-author">Carlito Mk</p>
+            <p class="review-loc">📍 Sant Pere de Ribes · Google</p>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="review-summary reveal">
+      <span class="review-summary-score" data-count="5" data-decimal="1">0.0</span>
+      <div>
+        <p class="review-summary-stars">★★★★★</p>
+        <p class="review-summary-text">Basado en reseñas de Google — nuestros clientes nos avalan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEDIR -->
+  <section id="pedir" class="section order-section">
+    <div class="order-box reveal">
+      <span class="order-eyebrow">🎡 ¡Hora de Pedir!</span>
+      <h2>¿Listo para el espectáculo?</h2>
+      <p>Pide online o a domicilio con Uber Eats. Disponible en nuestros dos locales.</p>
+      <div class="order-ctas">
+        <a class="btn btn-primary btn-confetti" href="https://www.ubereats.com/es-en/store/circus-smash-vilanova/SNbHA9ZiVL2prNHDFg7__g" target="_blank" rel="noopener">🛵 ¡Pide en Uber Eats!</a>
+        <a class="btn btn-outline" href="#locales">📋 Pide online</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-logo">CIRCUS SMASH</p>
+    <div class="footer-links">
+      <a href="#menu">Menú</a>
+      <a href="#locales">Locales</a>
+      <a href="#resenas">Reseñas</a>
+    </div>
+    <p class="footer-locs">📍 Vilanova i la Geltrú &nbsp;·&nbsp; 📍 Sant Pere de Ribes</p>
+    <p class="footer-small">© 2026 Circus Smash. Todos los derechos reservados.</p>
+    <p class="footer-credit">Designed by <span class="footer-credit-name">Merlin Wiart</span></p>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">▲</button>
+
+  <script>
+/* ============================================
+   CIRCUS SMASH v4 — JavaScript
+   Features: parallax, scroll reveal, animated counters,
+   live open/closed status, menu filter, confetti,
+   location switcher, accordion, back to top
+   ============================================ */
+
+// ============ PARALLAX HERO CHECKER ============
+const checkerBg = document.getElementById('checker-bg');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (checkerBg) {
+    checkerBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+  }
+}, { passive: true });
+
+// ============ NAV SCROLL EFFECT ============
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ============ SCROLL REVEAL ============
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ============ ANIMATED COUNTERS ============
+function animateCount(el) {
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const decimal = parseInt(el.dataset.decimal || 0);
+  const duration = 1400;
+  const start = performance.now();
+
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const value = target * ease;
+    el.textContent = value.toFixed(decimal) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = true;
+      animateCount(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// ============ LIVE OPEN/CLOSED STATUS ============
+const SCHEDULES = {
+  vilanova: {
+    0: [{ open: '12:30', close: '15:30' }, { open: '19:30', close: '22:30' }], // Sun
+    1: null,                                                                      // Mon closed
+    2: [{ open: '19:30', close: '22:30' }],                                       // Tue
+    3: [{ open: '19:30', close: '22:30' }],                                       // Wed
+    4: [{ open: '19:30', close: '22:30' }],                                       // Thu
+    5: [{ open: '12:30', close: '15:30' }, { open: '19:30', close: '23:00' }],    // Fri
+    6: [{ open: '12:30', close: '15:30' }, { open: '19:30', close: '23:00' }],    // Sat
+  },
+  ribes: {
+    0: [{ open: '12:00', close: '16:00' }, { open: '18:00', close: '23:00' }],   // Sun
+    1: [{ open: '18:00', close: '23:00' }],                                       // Mon
+    2: [{ open: '18:00', close: '23:00' }],                                       // Tue
+    3: [{ open: '18:00', close: '23:00' }],                                       // Wed
+    4: [{ open: '18:00', close: '23:00' }],                                       // Thu
+    5: [{ open: '12:00', close: '16:00' }, { open: '18:00', close: '00:00' }],   // Fri
+    6: [{ open: '12:00', close: '16:00' }, { open: '18:00', close: '00:00' }],   // Sat
+  }
+};
+
+function toMinutes(timeStr) {
+  if (!timeStr) return null;
+  const [h, m] = timeStr.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function getStatus() {
+  const now = new Date();
+  const day = now.getDay();
+  const currentMins = now.getHours() * 60 + now.getMinutes();
+
+  let anyOpen = false;
+  let nextOpen = null;
+  let nextClose = null;
+
+  for (const loc of ['vilanova', 'ribes']) {
+    const slots = SCHEDULES[loc][day];
+    if (!slots) continue;
+    for (const slot of slots) {
+      const o = toMinutes(slot.open);
+      const c = slot.close === '00:00' ? 24 * 60 : toMinutes(slot.close);
+      if (currentMins >= o && currentMins < c) {
+        anyOpen = true;
+        if (!nextClose || c < nextClose) nextClose = c;
+      } else if (currentMins < o) {
+        if (!nextOpen || o < nextOpen) nextOpen = o;
+      }
+    }
+  }
+
+  return { anyOpen, nextOpen, nextClose };
+}
+
+function formatMins(mins) {
+  const h = Math.floor(mins / 60) % 24;
+  const m = mins % 60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function getStatusSeconds() {
+  const now = new Date();
+  const day = now.getDay();
+  const currentSecs = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+
+  let anyOpen = false;
+  let nextOpenSecs = null;
+  let nextCloseSecs = null;
+
+  for (const loc of ['vilanova', 'ribes']) {
+    const slots = SCHEDULES[loc][day];
+    if (!slots) continue;
+    for (const slot of slots) {
+      const o = toMinutes(slot.open) * 60;
+      const c = slot.close === '00:00' ? 24 * 3600 : toMinutes(slot.close) * 60;
+      if (currentSecs >= o && currentSecs < c) {
+        anyOpen = true;
+        if (!nextCloseSecs || c < nextCloseSecs) nextCloseSecs = c;
+      } else if (currentSecs < o) {
+        if (!nextOpenSecs || o < nextOpenSecs) nextOpenSecs = o;
+      }
+    }
+  }
+  return { anyOpen, nextOpenSecs, nextCloseSecs, currentSecs };
+}
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function updateCountdown() {
+  const dot = document.getElementById('live-dot');
+  const text = document.getElementById('live-text');
+  const block = document.getElementById('countdown-block');
+  const label = document.getElementById('countdown-label');
+  const cdH = document.getElementById('cd-h');
+  const cdM = document.getElementById('cd-m');
+  const cdS = document.getElementById('cd-s');
+  if (!dot || !text) return;
+
+  const { anyOpen, nextOpenSecs, nextCloseSecs, currentSecs } = getStatusSeconds();
+
+  if (anyOpen) {
+    dot.className = 'live-dot open';
+    text.innerHTML = `<strong style="color:#22c55e">Abierto ahora</strong>`;
+    const remaining = nextCloseSecs - currentSecs;
+    const h = Math.floor(remaining / 3600);
+    const m = Math.floor((remaining % 3600) / 60);
+    const s = remaining % 60;
+    label.textContent = 'Cierra en';
+    block.style.display = 'block';
+    // Animate digit on change
+    [{ el: cdH, val: pad(h) }, { el: cdM, val: pad(m) }, { el: cdS, val: pad(s) }].forEach(({ el, val }) => {
+      if (el && el.textContent !== val) {
+        el.textContent = val;
+        el.classList.remove('tick');
+        void el.offsetWidth;
+        el.classList.add('tick');
+        setTimeout(() => el.classList.remove('tick'), 200);
+      }
+    });
+  } else {
+    dot.className = 'live-dot closed';
+    if (nextOpenSecs !== null) {
+      const remaining = nextOpenSecs - currentSecs;
+      const h = Math.floor(remaining / 3600);
+      const m = Math.floor((remaining % 3600) / 60);
+      const s = remaining % 60;
+      text.innerHTML = `<strong style="color:var(--red)">Cerrado ahora</strong>`;
+      label.textContent = 'Abre en';
+      block.style.display = 'block';
+      [{ el: cdH, val: pad(h) }, { el: cdM, val: pad(m) }, { el: cdS, val: pad(s) }].forEach(({ el, val }) => {
+        if (el && el.textContent !== val) {
+          el.textContent = val;
+          el.classList.remove('tick');
+          void el.offsetWidth;
+          el.classList.add('tick');
+          setTimeout(() => el.classList.remove('tick'), 200);
+        }
+      });
+    } else {
+      text.innerHTML = `<strong style="color:var(--red)">Cerrado hoy</strong>`;
+      block.style.display = 'none';
+    }
+  }
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ============ CONFETTI ============
+function launchConfetti(btn) {
+  const layer = document.getElementById('confetti-layer');
+  if (!layer) return;
+  const colors = ['#E11D2A', '#161616', '#F7F5F2', '#FFFFFF', '#FF6B6B', '#FFD93D'];
+  const shapes = ['■', '●', '▲', '★', '◆'];
+
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    piece.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    piece.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 30}%;
+      color: ${colors[Math.floor(Math.random() * colors.length)]};
+      font-size: ${8 + Math.random() * 14}px;
+      animation-duration: ${1.2 + Math.random() * 1.5}s;
+      animation-delay: ${Math.random() * 0.4}s;
+    `;
+    layer.appendChild(piece);
+    piece.addEventListener('animationend', () => piece.remove());
+  }
+}
+
+document.querySelectorAll('.btn-confetti').forEach(btn => {
+  btn.addEventListener('click', () => launchConfetti(btn));
+});
+
+// ============ MENU ACCORDION ============
+document.querySelectorAll('.menu-group-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+  });
+});
+
+// ============ MENU FILTER ============
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+
+    // Open the burger section when filtering
+    const burgersToggle = document.querySelector('[data-target="grp-burgers"]');
+    if (!burgersToggle.classList.contains('active')) {
+      burgersToggle.classList.add('active');
+    }
+
+    // Filter rows
+    document.querySelectorAll('.menu-row[data-tags]').forEach(row => {
+      if (filter === 'all' || row.dataset.tags.includes(filter)) {
+        row.classList.remove('hidden-filter');
+        row.style.animation = 'slideDown 0.3s ease';
+      } else {
+        row.classList.add('hidden-filter');
+      }
+    });
+
+    // Filter cards
+    document.querySelectorAll('.menu-card[data-tags]').forEach(card => {
+      if (filter === 'all' || card.dataset.tags.includes(filter)) {
+        card.classList.remove('hidden-filter');
+        card.style.animation = 'slideDown 0.3s ease';
+      } else {
+        card.classList.add('hidden-filter');
+      }
+    });
+  });
+});
+
+// ============ LOCATION SWITCHER ============
+document.querySelectorAll('.loc-switch-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.loc-switch-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const loc = btn.dataset.loc;
+    document.querySelectorAll('.loc-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('loc-' + loc).classList.add('active');
+  });
+});
+
+// ============ BACK TO TOP ============
+const backBtn = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  backBtn.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+backBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ============ RIPPLE ON BUTTONS ============
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const size = Math.max(btn.offsetWidth, btn.offsetHeight);
+    const rect = btn.getBoundingClientRect();
+    ripple.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${e.clientX - rect.left - size/2}px;
+      top: ${e.clientY - rect.top - size/2}px;
+    `;
+    btn.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  });
+});
+
+// ============ MAGNETIC STAT CARDS ============
+document.querySelectorAll('.stat-card, .historia-stat').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    card.style.transform = `translate(${x * 8}px, ${y * 8}px) rotate(${x * 3}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ============ HERO PARALLAX BADGE ON MOUSE MOVE ============
+const heroBadge = document.querySelector('.hero-badge');
+document.querySelector('.hero')?.addEventListener('mousemove', (e) => {
+  if (!heroBadge || window.innerWidth < 860) return;
+  const rect = document.querySelector('.hero').getBoundingClientRect();
+  const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+  const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+  heroBadge.style.marginTop = `${y * 20}px`;
+  heroBadge.style.marginRight = `${-x * 20}px`;
+});
+document.querySelector('.hero')?.addEventListener('mouseleave', () => {
+  if (heroBadge) { heroBadge.style.marginTop = ''; heroBadge.style.marginRight = ''; }
+});
+
+</script>
+</body>
+</html>
